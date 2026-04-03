@@ -1,0 +1,123 @@
+/* ヘッダー・ナビゲーション */
+.header {
+  /* ★ポイント1：位置を固定 */
+  position: fixed; 
+  top: 0;
+  left: 0; /* 左端から */
+  width: 100%; /* 横幅いっぱい広げる */
+  
+  /* ★ポイント2：余白と配置の調整 */
+  padding: 30px 50px;
+  display: flex;
+  justify-content: flex-end; /* ナビゲーションを右寄せに */
+  
+  /* ★ポイント3：重なり順（一番上にくるように） */
+  z-index: 1000;
+  
+  /* 背景を少し透過させると、スクロール時に下のコンテンツが透けて綺麗です */
+  background-color: rgba(245, 245, 245, 0.8); 
+  backdrop-filter: blur(5px); /* 背景をぼかす（モダンな手法） */
+}
+
+.nav ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav a, .lang {
+  text-decoration: none;
+  color: #333;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  transition: opacity 0.3s; /* ホバー時の動きを滑らかに */
+}
+
+.nav a:hover {
+  opacity: 0.5;
+}
+
+.detail-section {
+  padding: 150px 50px 100px;
+  background-color: #fff;
+}
+
+.detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 100px; /* テキストと画像の間隔を広めに */
+  align-items: flex-start;
+}
+
+/* 左側エリア */
+.detail-text-content {
+  flex: 1;
+}
+
+.project-title {
+  font-size: 36px;
+  margin-bottom: 80px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.info-block {
+  margin-bottom: 50px; /* 各セクションの間隔 */
+}
+
+.info-block h3 {
+  font-size: 24px; /* 見出しを大きく */
+  margin-bottom: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.info-block p {
+  font-size: 14px;
+  line-height: 2;
+  color: #444;
+  word-break: break-all;
+}
+
+/* 外部リンク */
+.external-link {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.external-link a {
+  font-size: 24px;
+  color: #88aadd;
+  text-decoration: underline;
+  text-underline-offset: 8px;
+}
+
+/* 右側画像エリア：スクロール追従設定 */
+.detail-image-preview {
+  flex: 0 0 400px;
+  top: 120px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.detail-image-preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* スマホ対応 */
+@media (max-width: 900px) {
+  .detail-container {
+    flex-direction: column-reverse; /* スマホでは画像を先に、または最後に */
+    gap: 50px;
+  }
+  .detail-image-preview {
+    position: static;
+    width: 100%;
+  }
+  .project-title { font-size: 28px; }
+}

@@ -1,0 +1,169 @@
+/* ヘッダー・ナビゲーション */
+.header {
+  /* ★ポイント1：位置を固定 */
+  position: fixed; 
+  top: 0;
+  left: 0; /* 左端から */
+  width: 100%; /* 横幅いっぱい広げる */
+  
+  /* ★ポイント2：余白と配置の調整 */
+  padding: 30px 50px;
+  display: flex;
+  justify-content: flex-end; /* ナビゲーションを右寄せに */
+  
+  /* ★ポイント3：重なり順（一番上にくるように） */
+  z-index: 1000;
+  
+  /* 背景を少し透過させると、スクロール時に下のコンテンツが透けて綺麗です */
+  background-color: rgba(245, 245, 245, 0.8); 
+  backdrop-filter: blur(5px); /* 背景をぼかす（モダンな手法） */
+}
+
+.nav ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav a, .lang {
+  text-decoration: none;
+  color: #333;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  transition: opacity 0.3s; /* ホバー時の動きを滑らかに */
+}
+
+.nav a:hover {
+  opacity: 0.5;
+}
+
+.detail-section {
+  padding: 150px 50px 100px;
+  background-color: #f9f9f9;
+}
+
+.detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 80px; /* テキストと画像の間隔 */
+  align-items: flex-start;
+}
+
+/* 左側：詳細テキストエリア */
+.detail-text-content {
+  flex: 1;
+}
+
+.project-title {
+  font-size: 32px;
+  margin-bottom: 60px;
+  font-weight: 500;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+}
+
+.info-block {
+  margin-bottom: 40px; /* 各項目の間隔 */
+}
+
+.info-block h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: #333;
+}
+
+.info-block p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #666;
+}
+
+/* ★「目的」の箇条書きスタイル */
+.goal-list {
+  list-style: none; /* デフォルトの点を消す */
+  padding-left: 0;
+}
+
+.goal-list li {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #666;
+  position: relative;
+  padding-left: 1.2em; /* 文頭の位置を合わせる */
+  margin-bottom: 10px;
+}
+
+/* ・（中点）をCSSでつける */
+.goal-list li::before {
+  content: "・";
+  position: absolute;
+  left: 0;
+  color: #666;
+}
+
+/* 下段の2カラムレイアウト */
+.detail-grid {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.grid-left, .grid-right {
+  flex: 1;
+}
+
+/* 外部リンク */
+.external-link {
+  margin-top: 60px;
+  text-align: right; /* 右寄せ */
+}
+
+.external-link a {
+  font-size: 20px;
+  color: #88aadd; /* 水色 */
+  text-decoration: underline;
+  transition: opacity 0.3s;
+}
+
+/* 右側画像エリア：スクロール追従設定 */
+.detail-image-preview.logo-mode {
+  flex: 0 0 500px; /* 画像エリアを少し広めに */
+  position: sticky; /* ★左の長い文章を読んでいる間、画像が画面に留まります */
+  top: 120px;
+  background-color: #fff;
+  padding: 40px; /* ロゴの周りに余白を持たせる */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.detail-image-preview.logo-mode img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* スマホ対応 */
+@media (max-width: 1024px) {
+  .detail-grid {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .detail-container {
+    flex-direction: column-reverse; /* スマホでは画像を先に、または最後に */
+    gap: 50px;
+  }
+  .detail-image-preview.logo-mode {
+    position: static;
+    width: 100%;
+  }
+}

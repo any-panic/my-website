@@ -1,0 +1,153 @@
+/* ヘッダー・ナビゲーション */
+.header {
+  /* ★ポイント1：位置を固定 */
+  position: fixed; 
+  top: 0;
+  left: 0; /* 左端から */
+  width: 100%; /* 横幅いっぱい広げる */
+  
+  /* ★ポイント2：余白と配置の調整 */
+  padding: 30px 50px;
+  display: flex;
+  justify-content: flex-end; /* ナビゲーションを右寄せに */
+  
+  /* ★ポイント3：重なり順（一番上にくるように） */
+  z-index: 1000;
+  
+  /* 背景を少し透過させると、スクロール時に下のコンテンツが透けて綺麗です */
+  background-color: rgba(245, 245, 245, 0.8); 
+  backdrop-filter: blur(5px); /* 背景をぼかす（モダンな手法） */
+}
+
+.nav ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav a, .lang {
+  text-decoration: none;
+  color: #333;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  transition: opacity 0.3s; /* ホバー時の動きを滑らかに */
+}
+
+.nav a:hover {
+  opacity: 0.5;
+}
+
+
+/* --- Contact Section --- */
+.contact-section {
+  padding: 80px 20px; /* 上下の余白を少し縮小 */
+  background-color: #f5f5f5; /* 既存のbody背景色に合わせる */
+}
+
+.contact-form-container {
+  max-width: 600px; /* フォーム全体の横幅をさらに縮小 */
+  margin: 0 auto;
+}
+
+.contact-title {
+  font-size: 50px; /* タイトルサイズを少し小さく */
+  text-align: center;
+  margin-bottom: 50px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* 各入力項目の間隔を縮小 */
+  align-items: flex-start; /* 全体を左揃えにする */
+  width: 100%; /* コンテナいっぱいに広げる */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* ラベルと入力欄の間隔を縮小 */
+  width: 100%; /* 親要素(contact-form)に合わせる */
+}
+
+/* 画像にある黄色いドットを擬似要素で再現 */
+.form-group label {
+  font-size: 20px; /* ラベルサイズを少し小さく */
+  position: relative;
+  padding-left: 20px;
+  color: #333;
+  margin-left: 0; /* 左揃え */
+}
+
+.form-group label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px; /* ドットを少し小さく */
+  height: 8px;
+  background-color: #e6c84f; /* 既存コードのボタン色と統一 */
+  border-radius: 50%;
+}
+
+/* 入力欄のスタイル */
+.form-group input,
+.form-group textarea {
+  width: 100%; /* 親要素(form-group)に合わせる */
+  padding: 12px; /* パディングを少し縮小 */
+  border: none;
+  background-color: #fff;
+  font-size: 15px; /* 文字サイズを少し小さく */
+  outline: none;
+  /* 入力欄を少しだけ浮かせたい場合は box-shadow を追加 */
+}
+
+.form-group input {
+  height: 45px; /* 入力欄の高さを少し低く */
+}
+
+/* 送信ボタンのエリア */
+.form-submit {
+  margin-top: 30px; /* 余白を縮小 */
+  display: flex;
+  justify-content: center; /* ボタンは中央揃えのままにする場合 */
+  width: 100%; /* コンテナいっぱいに広げる */
+}
+
+.submit-btn {
+  width: 160px; /* ボタンサイズを少し小さく */
+  padding: 12px 0;
+  background-color: #ddd; /* 画像のような薄いグレー */
+  border: none;
+  font-size: 20px; /* 文字サイズを少し小さく */
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #333;
+}
+
+.submit-btn:hover {
+  background-color: #ccc;
+  transform: translateY(-2px);
+}
+
+/* スマホ対応 */
+@media (max-width: 768px) {
+  .contact-title {
+    font-size: 36px;
+  }
+  
+  .form-group label {
+    font-size: 18px;
+  }
+
+  .submit-btn {
+    width: 100%; /* スマホではボタンを横いっぱいに */
+  }
+}

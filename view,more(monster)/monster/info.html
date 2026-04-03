@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Monster Color Card</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #c0ffee; /* 背景色 */
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        /* カード全体 */
+        .card {
+            background-color: #FDF5E6;
+            width: 320px;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            user-select: none;
+        }
+
+        /* 青いエリア */
+        .color-area {
+            background-color: #c0ffee;
+            height: 380px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+        }
+
+        /* 白目 */
+        .eye {
+            width: 110px;
+            height: 110px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* 黒目 */
+        .pupil {
+            width: 35px;
+            height: 35px;
+            background: #111;
+            border-radius: 50%;
+            position: absolute;
+            /* ここが重要：transitionで動きをヌルヌルさせる */
+            transition: transform 0.1s linear; 
+        }
+
+        /* テキストエリア */
+        .info {
+            padding: 25px 5px;
+            color: #1a1a1a;
+        }
+
+        .hex-code {
+            font-size: 42px;
+            font-weight: 900;
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        .color-name {
+            font-size: 20px;
+            margin: 5px 0 35px 0;
+            font-weight: 500;
+        }
+
+        .brand-name {
+            font-size: 14px;
+            font-weight: bold;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="color-area">
+            <div class="eye">
+                <div class="pupil"></div>
+            </div>
+            <div class="eye">
+                <div class="pupil"></div>
+            </div>
+        </div>
+        <div class="info">
+            <p class="hex-code">#0829</p>
+            <p class="color-name">Tatsui.Uemura</p>
+            <p class="brand-name">Moriguchi Street</p>
+        </div>
+    </div>
+
+    <script>
+        const pupils = document.querySelectorAll('.pupil');
+
+        document.addEventListener('mousemove', (e) => {
+            pupils.forEach((pupil, index) => {
+                const rect = pupil.parentElement.getBoundingClientRect();
+                
+                // 白目の中心座標
+                const eyeCenterX = rect.left + rect.width / 2;
+                const eyeCenterY = rect.top + rect.height / 2;
+
+                // マウスと中心の距離
+                const dx = e.clientX - eyeCenterX;
+                const dy = e.clientY - eyeCenterY;
+                
+                // 角度を計算
+                const angle = Math.atan2(dy, dx);
+                
+                // 動く範囲（左右で少し変えて「焦点が合わない」感じを出す）
+                // index 0 は左目、index 1 は右目
+                const distance = index === 0 ? 30 : 25; 
+
+                // マウスが近いときはあまり動かさず、遠いときに最大まで動かす
+                const maxDistance = Math.min(distance, Math.hypot(dx, dy) / 10);
+
+                const x = Math.cos(angle) * maxDistance;
+                const y = Math.sin(angle) * maxDistance;
+
+                // 黒目に座標を反映
+                pupil.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
